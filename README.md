@@ -71,3 +71,6 @@ Summarize is one of several ways to get chunk sizing. We'll list some advantages
 ##Disadvantages:
  * Does not return compressed size or compression ratio for arrays with additional (`zlib`) compression enabled. You can find that data `list('datastores')` or `list('chunk map')`
  * Does not return other on-disk size overhead for stored arrays (tombstones, free lists, etc are not counted)
+ 
+# Installation
+The easiest way is to first set up dev_tools (https://github.com/paradigm4/dev_tools). Follow the instructions there.
