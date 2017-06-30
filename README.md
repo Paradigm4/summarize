@@ -1,7 +1,7 @@
-#Summarize
+# Summarize
 Compute quick chunk density, size and skew statistics over SciDB arrays.
 
-#Example
+# Example
 Some spacing was added for quicker readability:
 ```
 $ iquery -naq "store(apply(build(<val:double> [x=1:10000000,1000000,0], random()), val2, iif(x%2=0, 'abc','def'), val3, 0), temp)"
@@ -11,7 +11,7 @@ $ iquery -aq "summarize(temp)"
 {0,0}        'all', 10000000, 170002720,     40,   1000000,     1e+06,   1000000,        48, 4.25007e+06,   9000072
 ```
 
-#Options
+# Options
 Summarize accepts string-style boolean flag options of `per_attribute` and `per_instance` which both default to `0` and can be combined:
 ```
 $ iquery -aq "summarize(temp, 'per_instance=1')"
@@ -48,7 +48,7 @@ $ iquery -aq "summarize(temp, 'per_attribute=1', 'per_instance=1')"
 {3,3} 'EmptyTag',2000000,96,2,1000000,1e+06,1000000,48,48,48
 ```
 
-#Returned Fields
+# Returned Fields
 Described as follows:
  * inst (dimension): the logical ID of the instance returning the data
  * attid (dimension): the attribute ID or 0 when returning totals across attributes
@@ -59,16 +59,16 @@ Described as follows:
  * min/avg/max_count: statistics about the number of non-empty cells in each chunk
  * min/avg/max_bytes: statistics about the sizes of chunks
 
-#Comparison to Other Tools
+# Comparison to Other Tools
 Summarize is one of several ways to get chunk sizing. We'll list some advantages and disadvantages.
-##Advantages:
+## Advantages:
  * Very quick: data is gathered quickly from chunk headers; chunks are not scanned off disk. For arrays exceeding tens of terabytes, `op_count` may take a while and `summarize` will perform much faster.
  * Does not require stored arrays: for example, `summarize(apply(temp, b, random()))` is possible. The user can thus avoid a store operation. However, an implicit materialization - full or partial, depending on the query - still happens as this is executed.
  * Easy to summarize the latest version of an array. `list('chunk map')` is good at describing how much total space an array takes up, but to find the size of the most recent version, the query is much more complicated.
  * Measures exactly the binary size of SciDB's internal RLE format.
  * Easy: a memorable keyword and quick access. Simpler than `aggregate(filter(list('chunk map'), uaid=...)...,)`
 
-##Disadvantages:
+## Disadvantages:
  * Does not return compressed size or compression ratio for arrays with additional (`zlib`) compression enabled. You can find that data `list('datastores')` or `list('chunk map')`
  * Does not return other on-disk size overhead for stored arrays (tombstones, free lists, etc are not counted)
  
