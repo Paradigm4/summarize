@@ -106,7 +106,7 @@ public:
                 string parameterString;
                 if (logical)
                 {
-                    parameterString = evaluate(((shared_ptr<OperatorParamLogicalExpression>&) param)->getExpression(),query, TID_STRING).getString();
+                    parameterString = evaluate(((shared_ptr<OperatorParamLogicalExpression>&) param)->getExpression(), TID_STRING).getString();
                 }
                 else
                 {
