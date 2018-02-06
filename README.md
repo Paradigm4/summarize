@@ -1,3 +1,11 @@
+# ATTENTION
+
+![Attention](http://static.lightwave3d.com/sdk/2015/python/_images/deprecated.jpg)
+
+As of [SciDB 18.1](http://forum.paradigm4.com/t/scidb-release-18-1/2124), `summarize` is now part of SciDB core [(see documentation here)](https://paradigm4.atlassian.net/wiki/spaces/scidb/pages/241500293/summarize). This repo is kept around for historical purposes, and potentially for external users to report issues. 
+
+This repo supports `summarize` for up till SciDB 16.9. 
+
 # Summarize
 Compute quick chunk density, size and skew statistics over SciDB arrays.
 
